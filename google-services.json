@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "781925865830",
+    "project_id": "interview-prep-9f8da",
+    "storage_bucket": "interview-prep-9f8da.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781925865830:android:b997a2c0c327258146d0a7",
+        "android_client_info": {
+          "package_name": "com.example.interviewprep"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzDlfKfuFWzLHiVnQ0dE7l2lmDW2e7_AY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
