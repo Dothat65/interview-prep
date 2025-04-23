@@ -2,20 +2,20 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
 
     id("com.google.gms.google-services")
-    id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.interviewprep"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.interviewprep"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 

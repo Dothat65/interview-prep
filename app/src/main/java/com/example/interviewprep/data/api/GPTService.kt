@@ -15,8 +15,7 @@ class GPTService @Inject constructor() {
         session: InterviewSession,
         previousQuestions: List<String>
     ): Result<String> = try {
-        // TODO: Implement actual API call to GPT
-        // This is a placeholder implementation
+        // TODO: Restore GPT logic when API key is ready
         Result.success("What experience do you have with Android development?")
     } catch (e: Exception) {
         Result.failure(e)
@@ -27,8 +26,7 @@ class GPTService @Inject constructor() {
         answer: String,
         jobDescription: String
     ): Result<String> = try {
-        // TODO: Implement actual API call to GPT
-        // This is a placeholder implementation
+        // TODO: Restore GPT logic when API key is ready
         Result.success("Good answer! You demonstrated strong knowledge of Android development concepts.")
     } catch (e: Exception) {
         Result.failure(e)
@@ -39,14 +37,13 @@ class GPTService @Inject constructor() {
         resume: String,
         count: Int = 10
     ): Result<List<FlashCard>> = try {
-        // TODO: Implement actual API call to GPT
-        // This is a placeholder implementation
+        // TODO: Restore GPT logic and Difficulty enum when API key is ready
         Result.success(listOf(
             FlashCard(
                 question = "What is the difference between LiveData and StateFlow?",
                 answer = "LiveData is lifecycle-aware and only emits values when the observer is in an active lifecycle state. StateFlow is not lifecycle-aware and always emits values, but it's more flexible and can be used in coroutines.",
-                category = "Android",
-                difficulty = Difficulty.MEDIUM
+                category = "Android"
+                // difficulty = Difficulty.MEDIUM // TODO: Restore when ready
             )
         ))
     } catch (e: Exception) {

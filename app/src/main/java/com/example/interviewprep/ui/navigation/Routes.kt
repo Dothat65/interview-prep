@@ -7,6 +7,7 @@ object Routes {
     const val MOCK_INTERVIEW = "mock_interview"
     const val PRACTICE = "practice"
     const val INTERVIEW_SESSION = "interview_session/{sessionId}"
+    const val ONBOARDING = "onboarding"
     
     fun interviewSession(sessionId: String) = "interview_session/$sessionId"
 } 

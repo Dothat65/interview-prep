@@ -9,6 +9,7 @@ import kotlinx.coroutines.tasks.await
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
+import android.net.Uri
 
 @Singleton
 class FirebaseService @Inject constructor(
@@ -83,7 +84,7 @@ class FirebaseService @Inject constructor(
     // Resume upload
     suspend fun uploadResume(file: File, userId: String): Result<String> = try {
         val storageRef = storage.reference.child("resumes/$userId/${file.name}")
-        val uploadTask = storageRef.putFile(file.toUri()).await()
+        val uploadTask = storageRef.putFile(Uri.fromFile(file)).await()
         val downloadUrl = uploadTask.storage.downloadUrl.await().toString()
         Result.success(downloadUrl)
     } catch (e: Exception) {

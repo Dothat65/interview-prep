@@ -7,10 +7,4 @@ data class FlashCard(
     val category: String = "",
     val difficulty: Difficulty = Difficulty.MEDIUM,
     val tags: List<String> = emptyList()
-)
-
-enum class Difficulty {
-    EASY,
-    MEDIUM,
-    HARD
-} 
+) 
