@@ -6,7 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Upload
 import androidx.compose.material3.*
@@ -29,114 +29,111 @@ fun UploadResumeScreen(
     hasUploadedResume: Boolean,
     onUploadResume: () -> Unit,
     onNext: () -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    currentStep: Int = 5
 ) {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF1AA260))
+            .padding(horizontal = 32.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(24.dp))
+
         // Back button
-        IconButton(
-            onClick = onBack,
+        Box(
             modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.TopStart)
+                .fillMaxWidth()
+                .padding(top = 8.dp)
         ) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                imageVector = Icons.Outlined.ArrowBack,
                 contentDescription = "Back",
+                tint = Color.White,
                 modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .background(Color.White.copy(alpha = 0.2f))
-                    .padding(8.dp),
-                tint = Color.White
+                    .size(32.dp)
+                    .padding(4.dp)
+                    .clickable { onBack() }
             )
         }
 
-        // Main content
-        Column(
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Logo
+        Image(
+            painter = painterResource(id = R.drawable.interviewlogo),
+            contentDescription = "App Logo",
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+                .padding(bottom = 8.dp)
+                .size(64.dp)
+        )
+
+        // App Name
+        Text(
+            text = "Interview Prep Lite",
+            color = Color.White,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        // Progress Bar
+        LinearProgressIndicator(
+            progress = currentStep / 5f,
+            color = Color.White,
+            trackColor = Color.White.copy(alpha = 0.3f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(6.dp)
+                .padding(bottom = 24.dp)
+        )
+
+        // Upload resume section
+        Text(
+            text = "Upload your resume",
+            color = Color.White,
+            fontSize = 18.sp,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        // Upload button
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(onClick = onUploadResume)
+                .background(
+                    if (hasUploadedResume) Color.White.copy(alpha = 0.2f)
+                    else Color.Transparent
+                )
+                .padding(vertical = 12.dp, horizontal = 16.dp)
         ) {
-            // Logo and title
-            Image(
-                painter = painterResource(id = R.drawable.interviewlogo),
-                contentDescription = "App Logo",
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(bottom = 16.dp)
-            )
-            
             Text(
-                text = "Interview Prep Lite",
+                text = if (hasUploadedResume) "Resume Uploaded ✓" else "Click to upload resume",
                 color = Color.White,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 32.dp)
-            )
-
-            if (hasUploadedResume) {
-                Icon(
-                    imageVector = Icons.Filled.CheckCircle,
-                    contentDescription = "Resume Uploaded",
-                    tint = Color.White,
-                    modifier = Modifier.size(64.dp)
-                )
-                Text(
-                    text = "Resume Uploaded",
-                    color = Color.White,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-            } else {
-                IconButton(
-                    onClick = onUploadResume,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .clip(CircleShape)
-                        .background(Color.White.copy(alpha = 0.2f))
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Upload,
-                        contentDescription = "Upload Resume",
-                        tint = Color.White,
-                        modifier = Modifier.size(32.dp)
-                    )
-                }
-                Text(
-                    text = "Upload Resume",
-                    color = Color.White,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            GreenButton(
-                text = if (hasUploadedResume) "Next" else "Skip",
-                onClick = onNext,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp)
+                fontSize = 16.sp
             )
         }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        GreenButton(
+            text = "Next",
+            onClick = onNext,
+            enabled = hasUploadedResume
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewUploadResumeScreen() {
-    var hasUploadedResume by remember { mutableStateOf(false) }
     UploadResumeScreen(
-        hasUploadedResume = hasUploadedResume,
-        onUploadResume = { hasUploadedResume = true },
+        hasUploadedResume = false,
+        onUploadResume = {},
         onNext = {},
-        onBack = {}
+        onBack = {},
+        currentStep = 5
     )
 }
