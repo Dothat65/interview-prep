@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,7 +29,8 @@ fun EnterNameScreen(
     onFirstNameChange: (String) -> Unit,
     onLastNameChange: (String) -> Unit,
     onNext: () -> Unit,
-    onBack: () -> Unit // <-- New back button handler
+    onBack: () -> Unit,
+    currentStep: Int = 1
 ) {
     Column(
         modifier = Modifier
@@ -74,7 +76,18 @@ fun EnterNameScreen(
             color = Color.White,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 32.dp)
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        // Progress Bar
+        LinearProgressIndicator(
+            progress = currentStep / 5f,
+            color = Color.White,
+            trackColor = Color.White.copy(alpha = 0.3f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(6.dp)
+                .padding(bottom = 24.dp)
         )
 
         // Name fields
@@ -111,6 +124,7 @@ fun PreviewEnterNameScreen() {
         onFirstNameChange = {},
         onLastNameChange = {},
         onNext = {},
-        onBack = {} // Preview no-op
+        onBack = {},
+        currentStep = 1
     )
 }

@@ -8,6 +8,8 @@ object Routes {
     const val PRACTICE = "practice"
     const val INTERVIEW_SESSION = "interview_session/{sessionId}"
     const val ONBOARDING = "onboarding"
+    const val ACCOUNT = "account"
+    const val SETTINGS = "settings"
     
     fun interviewSession(sessionId: String) = "interview_session/$sessionId"
 } 

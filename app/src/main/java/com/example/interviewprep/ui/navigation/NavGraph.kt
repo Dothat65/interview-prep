@@ -14,6 +14,8 @@ import com.example.interviewprep.ui.onboarding.LoginScreen
 import com.example.interviewprep.ui.onboarding.OnboardingFlow
 import com.example.interviewprep.ui.onboarding.SignUpScreen
 import com.example.interviewprep.ui.practice.PracticeScreen
+import com.example.interviewprep.ui.account.AccountScreen
+import com.example.interviewprep.ui.settings.SettingsScreen
 
 @Composable
 fun NavGraph(
@@ -53,11 +55,26 @@ fun NavGraph(
         
         composable(Routes.HOME) {
             HomeScreen(
+                navController = navController,
                 onStartInterview = { navController.navigate(Routes.MOCK_INTERVIEW) },
                 onPracticeClick = { navController.navigate(Routes.PRACTICE) },
                 onInterviewClick = { sessionId ->
                     navController.navigate(Routes.interviewSession(sessionId))
                 }
+            )
+        }
+
+        composable(Routes.ACCOUNT) {
+            AccountScreen(
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
+            )
+        }
+
+        composable(Routes.SETTINGS) {
+            SettingsScreen(
+                navController = navController,
+                onBackClick = { navController.popBackStack() }
             )
         }
         

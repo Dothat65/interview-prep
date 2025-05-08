@@ -2,10 +2,11 @@ package com.example.interviewprep.ui.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -27,97 +28,108 @@ fun SelectAgeGroupScreen(
     ageGroup: String,
     onAgeGroupChange: (String) -> Unit,
     onNext: () -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    currentStep: Int = 3
 ) {
-    val ageGroupOptions = listOf("18–24", "25–34", "35–44", "45+")
+    val ageGroupOptions = listOf(
+        "18-24",
+        "25-34",
+        "35-44",
+        "45-54",
+        "55+"
+    )
     var expanded by remember { mutableStateOf(false) }
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF1AA260))
+            .padding(horizontal = 32.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(24.dp))
+
         // Back button
-        IconButton(
-            onClick = onBack,
+        Box(
             modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.TopStart)
+                .fillMaxWidth()
+                .padding(top = 8.dp)
         ) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                imageVector = Icons.Outlined.ArrowBack,
                 contentDescription = "Back",
+                tint = Color.White,
                 modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .background(Color.White.copy(alpha = 0.2f))
-                    .padding(8.dp),
-                tint = Color.White
+                    .size(32.dp)
+                    .padding(4.dp)
+                    .clickable { onBack() }
             )
         }
 
-        // Main content
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            // Logo and title
-            Image(
-                painter = painterResource(id = R.drawable.interviewlogo),
-                contentDescription = "App Logo",
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(bottom = 16.dp)
-            )
-            
-            Text(
-                text = "Interview Prep Lite",
-                color = Color.White,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 32.dp)
-            )
+        Spacer(modifier = Modifier.height(24.dp))
 
-            // Dropdown menu
+        // Logo
+        Image(
+            painter = painterResource(id = R.drawable.interviewlogo),
+            contentDescription = "App Logo",
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .size(64.dp)
+        )
+
+        // App Name
+        Text(
+            text = "Interview Prep Lite",
+            color = Color.White,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        // Progress Bar
+        LinearProgressIndicator(
+            progress = currentStep / 5f,
+            color = Color.White,
+            trackColor = Color.White.copy(alpha = 0.3f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(6.dp)
+                .padding(bottom = 24.dp)
+        )
+
+        // Age group selection
+        Text(
+            text = "Select your age group",
+            color = Color.White,
+            fontSize = 18.sp,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        // Dropdown menu
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 32.dp)
+        ) {
             ExposedDropdownMenuBox(
                 expanded = expanded,
-                onExpandedChange = { expanded = !expanded }
+                onExpandedChange = { expanded = it }
             ) {
-                OutlinedTextField(
+                TextField(
                     value = ageGroup,
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text("Select Age Group", color = Color.White) },
-                    trailingIcon = {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowDropDown,
-                            contentDescription = "Show options",
-                            tint = Color.White
-                        )
-                    },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedBorderColor = Color.White,
-                        focusedBorderColor = Color.White,
-                        unfocusedLabelColor = Color.White,
-                        focusedLabelColor = Color.White,
-                        unfocusedTextColor = Color.White,
-                        focusedTextColor = Color.White,
-                        cursorColor = Color.White
-                    ),
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 32.dp)
                         .menuAnchor()
+                        .background(Color.White, CircleShape)
                 )
 
                 ExposedDropdownMenu(
                     expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    modifier = Modifier
-                        .background(Color.White)
+                    onDismissRequest = { expanded = false }
                 ) {
                     ageGroupOptions.forEach { option ->
                         DropdownMenuItem(
@@ -130,29 +142,24 @@ fun SelectAgeGroupScreen(
                     }
                 }
             }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            GreenButton(
-                text = "Next",
-                onClick = onNext,
-                enabled = ageGroup.isNotBlank(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp)
-            )
         }
+
+        GreenButton(
+            text = "Next",
+            onClick = onNext,
+            enabled = ageGroup.isNotBlank()
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewSelectAgeGroupScreen() {
-    var ageGroup by remember { mutableStateOf("") }
     SelectAgeGroupScreen(
-        ageGroup = ageGroup,
-        onAgeGroupChange = { ageGroup = it },
+        ageGroup = "",
+        onAgeGroupChange = {},
         onNext = {},
-        onBack = {}
+        onBack = {},
+        currentStep = 3
     )
 }

@@ -25,7 +25,7 @@ fun LoadingScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black),
+            .background(Color(0xFFA9FF80)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -39,17 +39,17 @@ fun LoadingScreen() {
             )
             Text(
                 text = "Interview Prep Lite",
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 32.dp)
             )
-            CircularProgressIndicator(color = Color.White)
+            CircularProgressIndicator(color = Color.Black)
         }
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFF000000)
+@Preview(showBackground = true, backgroundColor = 0xFFA9FF80)
 @Composable
 fun PreviewLoadingScreen() {
     LoadingScreen()
