@@ -14,4 +14,6 @@
 .cxx
 local.properties
 google-services.json
-
+.gradle/
+.idea/
+local.properties
