@@ -24,7 +24,7 @@ class OpenAIService @Inject constructor() {
     private val mediaType = "application/json; charset=utf-8".toMediaType()
 
     // Store the API key securely - for production you would use more secure methods
-    private val apiKey = "YOUR-KEY"
+    private val apiKey = "YOUR KEY"
 
     private val systemMessage = JSONObject().apply {
         put("role", "system")

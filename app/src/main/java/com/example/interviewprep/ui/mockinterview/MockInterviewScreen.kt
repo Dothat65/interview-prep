@@ -7,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack // Import for the back arrow icon
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -25,7 +26,7 @@ import com.example.interviewprep.viewmodel.MockInterviewViewModel
 @Composable
 fun MockInterviewScreen(
     sessionId: String? = null,
-    onNavigateBack: () -> Unit,
+    onNavigateBack: () -> Unit, // This lambda will be called when the back button is clicked
     viewModel: MockInterviewViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -84,7 +85,16 @@ fun MockInterviewScreen(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color(0xFF4E5EAE),
                     titleContentColor = Color.White
-                )
+                ),
+                // Add the navigationIcon slot for the back button
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) { // Call the onNavigateBack lambda
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back to Home" // Accessibility description
+                        )
+                    }
+                }
             )
         }
     ) { paddingValues ->
@@ -222,7 +232,8 @@ fun MockInterviewScreen(
                                 .height(56.dp),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color(0xFF4E5EAE)
-                            )
+                            ),
+                            shape = RoundedCornerShape(8.dp)
                         ) {
                             Text("Start Interview")
                         }
@@ -260,7 +271,7 @@ fun MockInterviewScreen(
                     )
                 }
 
-                else -> {
+                else -> { // Covers MockInterviewState.InterviewInProgress and MockInterviewState.FeedbackReceived
                     InterviewInProgress(
                         questionNumber = questionNumber,
                         totalQuestions = totalQuestions,
@@ -368,7 +379,8 @@ private fun InterviewInProgress(
             ) {
                 Text("Submit Answer")
             }
-        } else {
+        }
+        else { // showFeedback is true
             // Feedback display
             Card(
                 modifier = Modifier
