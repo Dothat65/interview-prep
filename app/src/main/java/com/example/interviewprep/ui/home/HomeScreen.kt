@@ -86,7 +86,7 @@ fun HomeScreen(
                 ) {
                     Column {
                         Text(
-                            text = "Hello, John!",
+                            text = "Hello, Bilal!",
                             style = MaterialTheme.typography.headlineMedium.copy(
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 28.sp
