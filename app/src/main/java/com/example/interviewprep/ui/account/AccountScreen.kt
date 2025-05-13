@@ -110,7 +110,7 @@ fun AccountScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = "Hello, John Doe",
+                        text = "Hello, Bilal Ahmad",
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
                             color = Color.White
@@ -118,7 +118,7 @@ fun AccountScreen(
                     )
 
                     Text(
-                        text = "john.doe@example.com",
+                        text = "bilal.ahmeed@gmail.com",
                         style = MaterialTheme.typography.bodyLarge.copy(
                             color = Color.White.copy(alpha = 0.9f)
                         ),
