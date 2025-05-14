@@ -1,17 +1,76 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-google-services.json
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
 
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+
+# Gradle files
+.gradle/
+build/
+.gradle
+gradlew.bat
+gradlew
+gradle/wrapper/
+
+# Local configuration file
+local.properties
+
+# Android Studio files
+*.iml
+.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+.idea/modules.xml
+.idea/navEditor.xml
+.idea/misc.xml
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/vcs.xml
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Keystore files
+*.jks
+*.keystore
+
+# Sensitive configuration
+app/google-services.json
+app/src/debug/google-services.json
+app/src/release/google-services.json
+
+# API keys and credentials
+apikey.properties
+**/BuildConfig.java
+
+# Log Files
+*.log
+
+# Temporary files 
+.externalNativeBuild/
+.cxx/
+*.hprof
